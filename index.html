@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>WebAR Sound Positioning</title>
+    <link rel="stylesheet" href="ui.css">
+    <script async src="https://unpkg.com/es-module-shims/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.157.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.157.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div id="ar-prompt">
+            <div class="prompt-content">
+                <h1>WebAR Sound Experience</h1>
+                <p>Place objects in AR space and hear spatial audio</p>
+                <button id="start-ar">Start AR Experience</button>
+            </div>
+        </div>
+        <div id="instructions" class="hidden">
+            <p>Tap on the ground to place red sound cube</p>
+        </div>
+        <div id="toggle-controls" class="hidden">
+            <button id="toggle-settings">
+                <svg class="settings-icon" viewBox="0 0 24 24">
+                    <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                </svg>
+            </button>
+        </div>
+        <div id="sound-controls" class="hidden collapsed">
+            <div class="control-group">
+                <label>Model1 Volume: <span id="red-volume-value">15.0</span></label>
+                <input type="range" id="red-volume" min="0" max="30" step="0.1" value="15.0">
+            </div>
+            <div class="control-group">
+                <label>Model2 Volume: <span id="blue-volume-value">1.0</span></label>
+                <input type="range" id="blue-volume" min="0" max="30" step="0.1" value="1.0">
+            </div>
+            <div class="control-group">
+                <label>Reference Distance: <span id="ref-distance-value">0.3</span>m</label>
+                <input type="range" id="ref-distance" min="0.1" max="5" step="0.1" value="0.3">
+            </div>
+            <div class="control-group">
+                <label>Rolloff Factor: <span id="rolloff-value">1.9</span></label>
+                <input type="range" id="rolloff" min="0" max="5" step="0.1" value="1.9">
+            </div>
+            <div class="control-group">
+                <label>Distance Model:</label>
+                <select id="distance-model">
+                    <option value="inverse">Inverse</option>
+                    <option value="linear">Linear</option>
+                    <option value="exponential">Exponential</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Model Scale: <span id="model-scale-value">15.0</span></label>
+                <input type="range" id="model-scale" min="7" max="30" step="0.5" value="15.0">
+            </div>
+            <div class="control-group">
+                <label>Model2 Scale: <span id="model2-scale-value">0.3</span></label>
+                <input type="range" id="model2-scale" min="0.1" max="20" step="0.1" value="0.3">
+            </div>
+        </div>
+        <div id="error-message" class="hidden">
+            <p>Error starting AR. Please check camera permissions and try again.</p>
+        </div>
+    </div>
+    <script src="app.js" type="module"></script>
+</body>
+</html> 
